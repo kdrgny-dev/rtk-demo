@@ -5,15 +5,26 @@ import {
 export const Data = () => {
   const {
     data: allProductsData,
-    error,
-    isError,
     isLoading,
   } = useGetAllProductsQuery();
+
   const { data: singleProductData } = useGetProductQuery("iphone");
 
-  console.log(allProductsData);
-  console.log(singleProductData);
-
   if (isLoading) return <h1> Loading...</h1>;
-  return <div> Data: </div>;
+  return (
+    <>
+      <h1> All Products</h1>
+      <ul>
+        {allProductsData.products.map((product) => (
+          <li key={product.id}>{product.title}</li>
+        ))}
+      </ul>
+      <h1> Single Product</h1>
+      <ul>
+        <li>
+          {singleProductData.products[0].title}
+        </li>
+      </ul>
+    </>
+  )
 };
